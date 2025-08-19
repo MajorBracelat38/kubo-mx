@@ -1,0 +1,29 @@
+from PIL import Image, ImageDraw, ImageFont
+
+# Crear una imagen cuadrada
+size = 256
+img = Image.new("RGBA", (size, size), (255, 255, 255, 0))
+
+# Dibujar la letra K en el centro
+draw = ImageDraw.Draw(img)
+
+# Intentar usar una fuente estándar
+try:
+    font = ImageFont.truetype("arial.ttf", 180)
+except:
+    font = ImageFont.load_default()
+
+text = "K"
+text_width, text_height = draw.textsize(text, font=font)
+position = ((size - text_width) / 2, (size - text_height) / 2)
+
+# Dibujar en azul
+draw.text(position, text, font=font, fill=(37, 99, 235, 255))  # Azul #2563eb
+
+# Guardar como PNG (puede convertirse fácilmente a .ico)
+png_path = "/mnt/data/favicon.png"
+ico_path = "/mnt/data/favicon.ico"
+img.save(png_path, "PNG")
+img.save(ico_path, format="ICO")
+
+png_path, ico_path
