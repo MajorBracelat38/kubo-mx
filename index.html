@@ -95,6 +95,16 @@
 
     /* Helpers */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+    /* Productos (galería con filtros) */
+.filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+.filter-btn{border:1px solid var(--border); background:var(--bg); padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600}
+.filter-btn.active, .filter-btn:hover{background:var(--brand); color:#fff; border-color:transparent}
+
+.product-card{display:flex; flex-direction:column; gap:10px}
+.product-img{aspect-ratio: 1 / 1; width:100%; object-fit:cover; border-radius:10px; border:1px solid var(--border); background:#fff}
+.tag{display:inline-block; padding:4px 8px; border:1px solid var(--border); border-radius:999px; font-size:12px; color:var(--muted)}
+.hidden{display:none !important}
   </style>
 </head>
 <body>
@@ -147,28 +157,124 @@
   </section>
 
   <section id="portafolio" style="background:var(--card)">
-    <div class="container">
-      <h2>Productos</h2>
-      <p class="lead"></p>
-      <div class="grid">
-        <div class="col-6"><div class="card"><h3>Proyecto A</h3><p class="muted">Descripción breve del proyecto.</p></div></div>
-        <div class="col-6"><div class="card"><h3>Proyecto B</h3><p class="muted">Descripción breve del proyecto.</p></div></div>
-        <div class="col-6"><div class="card"><h3>Proyecto C</h3><p class="muted">Descripción breve del proyecto.</p></div></div>
-        <div class="col-6"><div class="card"><h3>Proyecto D</h3><p class="muted">Descripción breve del proyecto.</p></div></div>
-      </div>
-    </div>
-  </section>
+  <div class="container">
+    <h2>Productos</h2>
+    <p class="lead">Explora nuestros artículos por categoría o mira todo.</p>
 
-  <section id="precios">
-    <div class="container">
-      <h2>Precios</h2>
-      <p class="lead">Tabla simple de precios. Ajusta según tus planes.</p>
-      <div class="grid">
-        <div class="col-4"><div class="card"><h3>Básico</h3><p class="price">$0</p><p class="muted">Ideal para empezar</p><a class="btn" href="#contacto">Elegir</a></div></div>
-        <div class="col-4"><div class="card"><h3>Pro</h3><p class="price">$9</p><p class="muted">Para proyectos serios</p><a class="btn primary" href="#contacto">Elegir</a></div></div>
-        <div class="col-4"><div class="card"><h3>Empresa</h3><p class="price">$29</p><p class="muted">Soporte prioritario</p><a class="btn" href="#contacto">Elegir</a></div></div>
-      </div>
+    <!-- Filtros -->
+    <div class="filters" aria-label="Filtros de productos">
+      <button class="filter-btn active" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="sublimados">Sublimados</button>
+      <button class="filter-btn" data-filter="hogar">Para el Hogar</button>
+      <button class="filter-btn" data-filter="regalos">Regalos / Detalles</button>
     </div>
+
+    <!-- Galería -->
+    <div id="gridProductos" class="grid">
+      <!-- ====== SUBLIMADOS ====== -->
+      <div class="col-4 product-card" data-cat="sublimados">
+        <img class="product-img" loading="lazy" src="img/productos/playera.jpg" alt="Playera sublimada">
+        <div class="card">
+          <h3>Playera sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Personaliza con tu diseño.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <img class="product-img" loading="lazy" src="img/productos/taza.jpg" alt="Taza sublimada">
+        <div class="card">
+          <h3>Taza sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Ideal para regalos.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <img class="product-img" loading="lazy" src="img/productos/sudadera.jpg" alt="Sudadera sublimada">
+        <div class="card">
+          <h3>Sudadera</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Calidad y confort.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <img class="product-img" loading="lazy" src="img/productos/termo.jpg" alt="Termo sublimado">
+        <div class="card">
+          <h3>Termo</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Mantén tu estilo.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <img class="product-img" loading="lazy" src="img/productos/cilindro.jpg" alt="Cilindro sublimado">
+        <div class="card">
+          <h3>Cilindro</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Para uso diario.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <img class="product-img" loading="lazy" src="img/productos/piedra.jpg" alt="Piedra impresa por sublimación">
+        <div class="card">
+          <h3>Piedra fotográfica</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Decoración resistente.</p>
+        </div>
+      </div>
+
+      <!-- ====== HOGAR ====== -->
+      <div class="col-4 product-card" data-cat="hogar">
+        <img class="product-img" loading="lazy" src="\KUBO\Para el Hogar\Juegos-de-bano-flor-amarilla.jfif" alt="Juego de baño flor amarilla">
+        <div class="card">
+          <h3>Juego de baño con flor amarilla</h3>
+          <span class="tag">Para el Hogar</span>
+          <p class="muted">Set personalizado a tu estilo.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="hogar">
+        <img class="product-img" loading="lazy" src="img/productos/toallero.jpg" alt="Toallero personalizado">
+        <div class="card">
+          <h3>Toallero</h3>
+          <span class="tag">Para el Hogar</span>
+          <p class="muted">Funcional y decorativo.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="hogar">
+        <img class="product-img" loading="lazy" src="img/productos/ceramica.jpg" alt="Cerámica pintada a mano">
+        <div class="card">
+          <h3>Cerámica pintada</h3>
+          <span class="tag">Para el Hogar</span>
+          <p class="muted">Piezas únicas hechas a mano.</p>
+        </div>
+      </div>
+
+      <!-- ====== REGALOS / DETALLES ====== -->
+      <div class="col-6 product-card" data-cat="regalos">
+        <img class="product-img" loading="lazy" src="img/productos/cubo-tulipanes.jpg" alt="Cubo con tulipanes infinitos">
+        <div class="card">
+          <h3>Cubo con tulipanes infinitos</h3>
+          <span class="tag">Regalos / Detalles</span>
+          <p class="muted">Elegancia y originalidad en un solo detalle.</p>
+        </div>
+      </div>
+
+      <div class="col-6 product-card" data-cat="regalos">
+        <img class="product-img" loading="lazy" src="img/productos/nube-tulipanes.jpg" alt="Nube con tulipanes infinitos">
+        <div class="card">
+          <h3>Nube con tulipanes infinitos</h3>
+          <span class="tag">Regalos / Detalles</span>
+          <p class="muted">Un regalo creativo y memorable.</p>
+        </div>
+      </div>
+
+     </div>
+   </div>
   </section>
 
   <section id="faq" style="background:var(--card)">
@@ -185,7 +291,7 @@
     <div class="container">
       <h2>Contacto</h2>
       <p class="lead">Formulario sin backend usando <code>mailto:</code> (abre tu cliente de correo). Para algo real, integra Formspree o un backend propio.</p>
-      <form class="card" action="alexis.uriel.tenorio@gmail.com" method="post" enctype="text/plain">
+      <form class="card" action="mailto:alexis.uriel.tenorio@gmail.com" method="post" enctype="text/plain">
         <label>Nombre<br><input name="Nombre" required style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></label><br><br>
         <label>Correo<br><input type="email" name="Email" required style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></label><br><br>
         <label>Mensaje<br><textarea name="Mensaje" required rows="5" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></textarea></label><br><br>
@@ -196,7 +302,7 @@
 
   <footer>
     <div class="container">
-      © <span id="year"></span> Tu Nombre. Hecho con ❤️ desde cero.
+      © <span id="year"></span> Kubo MX. Hecho con ❤️ desde cero.
     </div>
   </footer>
 
@@ -251,6 +357,25 @@
     }
     addEventListener('scroll', toggleTop, {passive:true});
     toggleTop();
+
+    // ----- Filtros de Productos -----
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('#gridProductos .product-card');
+
+    filterButtons.forEach(btn=>{
+     btn.addEventListener('click', ()=>{
+    // activar botón
+    filterButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const f = btn.dataset.filter; // all | sublimados | hogar | regalos
+    productCards.forEach(card=>{
+      const cat = card.dataset.cat;
+      const show = (f==='all') || (cat===f);
+      card.classList.toggle('hidden', !show);
+      });
+    });
+  });
   </script>
 </body>
 </html>
