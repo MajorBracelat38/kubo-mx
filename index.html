@@ -156,10 +156,37 @@
     </div>
   </section>
 
-  <section id="portafolio" style="background:var(--card)">
+<style>
+/* Filtros */
+.filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+.filter-btn{border:1px solid var(--border); background:var(--bg); padding:8px 12px; border-radius:999px; cursor:pointer; font-weight:600}
+.filter-btn.active, .filter-btn:hover{background:var(--brand); color:#fff; border-color:transparent}
+
+/* Cards de productos */
+.product-card{display:flex; flex-direction:column; gap:10px}
+.product-img{aspect-ratio:1/1; width:100%; object-fit:contain; background:#fff; border-radius:10px; border:1px solid var(--border)}
+
+/* Carrusel */
+.carousel{position:relative}
+.carousel .nav-btn{
+  position:absolute; top:50%; transform:translateY(-50%);
+  border:1px solid var(--border); background:var(--bg);
+  width:34px; height:34px; border-radius:999px; cursor:pointer; font-size:18px; line-height:0;
+  display:flex; align-items:center; justify-content:center;
+}
+.carousel .prev{left:6px}
+.carousel .next{right:6px}
+
+/* Etiquetita */
+.tag{display:inline-block; padding:4px 8px; border:1px solid var(--border); border-radius:999px; font-size:12px; color:var(--muted)}
+.hidden{display:none !important}
+</style>
+
+<!-- ====== HTML ====== -->
+<section id="portafolio" style="background:var(--card)">
   <div class="container">
     <h2>Productos</h2>
-    <p class="lead">Explora nuestros artículos por categoría o mira todo.</p>
+    <p class="lead">Explora por categoría o mira todo.</p>
 
     <!-- Filtros -->
     <div class="filters" aria-label="Filtros de productos">
@@ -171,22 +198,28 @@
 
     <!-- Galería -->
     <div id="gridProductos" class="grid">
-      <!-- ====== SUBLIMADOS ====== -->
+
+      <!-- ========= SUBLIMADOS ========= -->
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["img/productos/taza1.jpg","img/productos/taza2.jpg"]'>
+          <img class="product-img" src="img/productos/taza1.jpg" alt="Taza sublimada">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Taza sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Ideal para regalos.</p>
+        </div>
+      </div>
+      
       <div class="col-4 product-card" data-cat="sublimados">
         <img class="product-img" loading="lazy" src="img/productos/playera.jpg" alt="Playera sublimada">
         <div class="card">
           <h3>Playera sublimada</h3>
           <span class="tag">Sublimados</span>
           <p class="muted">Personaliza con tu diseño.</p>
-        </div>
-      </div>
-
-      <div class="col-4 product-card" data-cat="sublimados">
-        <img class="product-img" loading="lazy" src="img/productos/taza.jpg" alt="Taza sublimada">
-        <div class="card">
-          <h3>Taza sublimada</h3>
-          <span class="tag">Sublimados</span>
-          <p class="muted">Ideal para regalos.</p>
         </div>
       </div>
 
@@ -200,11 +233,156 @@
       </div>
 
       <div class="col-4 product-card" data-cat="sublimados">
-        <img class="product-img" loading="lazy" src="img/productos/termo.jpg" alt="Termo sublimado">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Taza-blanca-bautizo-izquierda(800x800px).jpg","Sublimacion/Taza-blanca-bautizo-centro(800x800px).jpg","Sublimacion/Taza-blanca-bautizo-derecha(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Taza-blanca-bautizo-izquierda(800x800px).jpg" alt="Taza Blanca sublimada">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
         <div class="card">
-          <h3>Termo</h3>
+          <h3>Taza Blanca Sublimada</h3>
           <span class="tag">Sublimados</span>
-          <p class="muted">Mantén tu estilo.</p>
+          <p class="muted">Taza Blanca personalizada</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Taza-blanca-colibri-izquierda(800x800px).jpg","Sublimacion/Taza-blanca-colibri-centro(800x800px).jpg","Sublimacion/Taza-blanca-colibri-derecha(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Taza-blanca-colibri-izquierda(800x800px).jpg" alt="Taza Blanca con oreja de color sublimada">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Taza Blanca con Oreja de color Sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Taza Blanca con oreja de color personalizada</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Taza-dorada-leon-izquierdo(800x800px).jpg","Sublimacion/Taza-dorada-leon-centro(800x800px).jpg","Sublimacion/Taza-dorada-leon-derecha(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Taza-dorada-leon-izquierdo(800x800px).jpg" alt="Taza Dorada Sublimada">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Taza Dorada Sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Taza Dorada personalizada</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Taza-plateada-lobo-izquierdo(800x800px).jpg","Sublimacion/Taza-plateada-lobo-centro(800x800px).jpg","Sublimacion/Taza-plateada-lobo-derecha(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Taza-plateada-lobo-izquierdo(800x800px).jpg" alt="Taza Plateada Sublimada">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Taza Plateada Sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Taza Plateada personalizada</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Taza-magica-izquierda(800x800px).jpg","Sublimacion/Taza-magica-frase-izquierda(800x800px).jpg","Sublimacion/Taza-magica-centro(800x800px).jpg","Sublimacion/Taza-magica-frase-centro(800x800px).jpg","Sublimacion/Taza-magica-derecha(800x800px).jpg","Sublimacion/Taza-magica-frase-derecha(800x800).jpg"]'>
+          <img class="product-img" src="Sublimacion/Taza-magica-izquierda(800x800px).jpg" alt="Taza Mágica">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Taza Mágica Sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Taza Mágica personalizada</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Taza-blanca-grande-yoda-izquierda(800x800px).jpg","Sublimacion/Taza-blanca-grande-yoda-centro(800x800px).jpg","Sublimacion/Taza-blanca-grande-yoda-derecha(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Taza-blanca-grande-yoda-izquierda(800x800px).jpg" alt="Taza Blanca de 16 Onzas sublimada">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Taza Blanca de 16 Onzas Sublimada</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Taza Blanca de 16 Onzas personalizada</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Termo-flores-izquierda(800x800px),jpg.jpg","Sublimacion/Termo-flores-centro(800x800px).jpg","Sublimacion/Termo-flores-derecha(800x800px).jpg","Sublimacion/Termo-flores-atras(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Termo-flores-izquierda(800x800px),jpg.jpg" alt="Termo Flores Sublimado">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Termo Flores Sublimado</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Termo Sublimado</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Tarro-milan-izquierda(800x800px).jpg","Sublimacion/Tarro-milan-centro(800x800px).jpg","Sublimacion/Tarro-milan-derecha(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Tarro-milan-izquierda(800x800px).jpg" alt="Tarro Sublimado">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Tarro sublimado</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Tarro personalizado</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Vaso-DTF-cumpleanos(800x800px).jpg","Sublimacion/Vaso-DTF-cumpleanos-atras(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Vaso-DTF-cumpleanos(800x800px).jpg" alt="Vaso DTF">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Vaso DTF</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Vaso DTF</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Vaso-azul-delfin-atras(800x800px).jpg","Sublimacion/Vaso-azul-delfin(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Vaso-azul-delfin-atras(800x800px).jpg" alt="Vaso Sublimado">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Vaso Sublimado</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Vaso Sublimado</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Vaso-rosa-vinil(800x800px).jpg","Sublimacion/Vaso-rosa-vinil-detras(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Vaso-rosa-vinil(800x800px).jpg" alt="Vaso con Vinil">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Vaso con Vinil</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Vaso con Vinil</p>
         </div>
       </div>
 
@@ -226,34 +404,35 @@
         </div>
       </div>
 
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Caja-blanca-con-taza-frente-izquierdo(800x800px).jpg","Sublimacion/Caja-blanca-con-taza-frente-derecho(800x800px).jpg","Sublimacion/Caja-blanca-con-taza-lado-derecho(800x800px).jpg","Sublimacion/Caja-blanca-con-taza-atras(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Caja-blanca-con-taza-frente-izquierdo(800x800px).jpg" alt="Caja Blanca para Taza - Sublimación">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Caja Blanca para Taza (Sublimación)</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Personaliza tu caja.</p>
+        </div>
+      </div>
+
+      <div class="col-4 product-card" data-cat="sublimados">
+        <div class="carousel" 
+             data-fotos='["Sublimacion/Caja-boda-con-taza-frente-izquierdo(800x800px),jpg.jpg","Sublimacion/Caja-boda-con-taza-frente-derecho(800x800px).jpg","Sublimacion/Caja-boda-con-taza-lado-derecho(800x800px).jpg","Sublimacion/Caja-boda-con-taza-arriba(800x800px).jpg","Sublimacion/Caja-boda-con-taza-atras(800x800px).jpg"]'>
+          <img class="product-img" src="Sublimacion/Caja-boda-con-taza-frente-izquierdo(800x800px),jpg.jpg" alt="Caja Sublimada para Taza">
+          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
+          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
+        </div>
+        <div class="card">
+          <h3>Caja Sublimada para Taza</h3>
+          <span class="tag">Sublimados</span>
+          <p class="muted">Personaliza tu caja.</p>
+        </div>
+      </div>
+
       <!-- ====== HOGAR ====== -->
-      <div class="col-4 product-card" data-cat="hogar">
-        <img class="product-img" loading="lazy" src="Img/Para el Hogar/Juegos-de-bano-flor-amarilla.jpg" alt="Juego de baño flor amarilla">
-        <div class="card">
-          <h3>Juego de Baño con Flor Amarilla</h3>
-          <span class="tag">Para el Hogar</span>
-          <p class="muted">Personaliza tu hogar con un toallero para tu baño.</p>
-        </div>
-      </div>
-
-      <div class="col-4 product-card" data-cat="hogar">
-        <img class="product-img" loading="lazy" src="Img/Para el Hogar/Juegos-de-bano-flor-rosa.jpg" alt="Juego de baño flor rosa">
-        <div class="card">
-          <h3>Juego de Baño con Flor Rosa</h3>
-          <span class="tag">Para el Hogar</span>
-          <p class="muted">Personaliza tu baño.</p>
-        </div>
-      </div>
-
-      <div class="col-4 product-card" data-cat="hogar">
-        <img class="product-img" loading="lazy" src="Img/Para el Hogar/Juegos-de-bano-flor-rosa.jpg" alt="Juego de baño flor rosa">
-        <div class="card">
-          <h3>Juego de Baño con Flor Rosa</h3>
-          <span class="tag">Para el Hogar</span>
-          <p class="muted">Personaliza tu baño.</p>
-        </div>
-      </div>
-
       <div class="col-4 product-card" data-cat="hogar">
         <img class="product-img" loading="lazy" src="Para el Hogar/Juego-de-bano-bruja(800x800px).jpg" alt="Juego de baño bruja">
         <div class="card">
@@ -365,7 +544,7 @@
       <div class="col-4 product-card" data-cat="hogar">
         <img class="product-img" loading="lazy" src="Para el Hogar/Juego-de-bano-unicornio(800x800px).jpg" alt="Juego de baño unicornio">
         <div class="card">
-          <h3>Juego de Baño Renos</h3>
+          <h3>Juego de Baño Unicornio</h3>
           <span class="tag">Para el Hogar</span>
           <p class="muted">Personaliza tu baño.</p>
         </div>
@@ -572,6 +751,44 @@
       const show = (f==='all') || (cat===f);
       card.classList.toggle('hidden', !show);
       });
+    });
+  });
+
+    // ----- Filtros -----
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const productCards = document.querySelectorAll('#gridProductos .product-card');
+    
+    filterButtons.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+    filterButtons.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter; // all | sublimados | hogar | regalos
+    productCards.forEach(card=>{
+      const cat = card.dataset.cat;
+      const show = (f==='all') || (cat===f);
+      card.classList.toggle('hidden', !show);
+      });
+    });
+  });
+
+    // ----- Carruseles independientes -----
+    document.querySelectorAll('.carousel').forEach(carousel=>{
+    const img = carousel.querySelector('img');
+    let fotos = [];
+    try { fotos = JSON.parse(carousel.dataset.fotos); } catch(e){ fotos = [img.src]; }
+    let i = 0;
+
+    const prev = carousel.querySelector('.prev');
+    const next = carousel.querySelector('.next');
+
+    if(prev) prev.addEventListener('click', ()=>{
+    i = (i - 1 + fotos.length) % fotos.length;
+    img.src = fotos[i];
+    });
+    
+    if(next) next.addEventListener('click', ()=>{
+    i = (i + 1) % fotos.length;
+    img.src = fotos[i];
     });
   });
   </script>
