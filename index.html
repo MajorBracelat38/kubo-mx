@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -168,7 +168,8 @@
 
 /* Carrusel */
 .carousel{position:relative}
-.carousel .nav-btn{
+.carousel .nav-btn{ z-index: 2; }
+.carousel img{ display:block; width:100%; }
   position:absolute; top:50%; transform:translateY(-50%);
   border:1px solid var(--border); background:var(--bg);
   width:34px; height:34px; border-radius:999px; cursor:pointer; font-size:18px; line-height:0;
@@ -199,21 +200,8 @@
     <!-- Galería -->
     <div id="gridProductos" class="grid">
 
-      <!-- ========= SUBLIMADOS ========= -->
-      <div class="col-4 product-card" data-cat="sublimados">
-        <div class="carousel" 
-             data-fotos='["img/productos/taza1.jpg","img/productos/taza2.jpg"]'>
-          <img class="product-img" src="img/productos/taza1.jpg" alt="Taza sublimada">
-          <button class="nav-btn prev" aria-label="Imagen anterior">‹</button>
-          <button class="nav-btn next" aria-label="Imagen siguiente">›</button>
-        </div>
-        <div class="card">
-          <h3>Taza sublimada</h3>
-          <span class="tag">Sublimados</span>
-          <p class="muted">Ideal para regalos.</p>
-        </div>
-      </div>
-      
+    <!-- ========= SUBLIMADOS ========= -->
+    
       <div class="col-4 product-card" data-cat="sublimados">
         <img class="product-img" loading="lazy" src="img/productos/playera.jpg" alt="Playera sublimada">
         <div class="card">
@@ -686,111 +674,100 @@
   <a id="toTop" href="#inicio" class="to-top" aria-label="Volver arriba">↑</a>
 
   <script>
-    // Persistencia de tema
-    const root = document.documentElement;
-    const themeBtn = document.getElementById('theme');
-    const userPref = localStorage.getItem('theme');
-    if(userPref==='dark'){root.classList.add('dark')}
-    themeBtn.addEventListener('click',()=>{
-      const isDark = root.classList.toggle('dark');
-      localStorage.setItem('theme', isDark? 'dark':'light');
-    });
+  // === MODO OSCURO SIEMPRE ===
+  const root = document.documentElement;
+  root.classList.add('dark'); // fuerza el tema oscuro
+  // Si tienes un botón de tema, lo desactivamos más abajo.
 
-    // Año dinámico
-    document.getElementById('year').textContent = new Date().getFullYear();
+  // Año dinámico
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Menú móvil
-    const hamb = document.getElementById('hamburger');
-    const menu = document.getElementById('menu');
-    hamb.addEventListener('click',()=>{
+  // Menú móvil
+  const hamb = document.getElementById('hamburger');
+  const menu = document.getElementById('menu');
+  if (hamb && menu) {
+    hamb.addEventListener('click', () => {
       const open = menu.classList.toggle('open');
       hamb.setAttribute('aria-expanded', String(open));
     });
-    // Cerrar menú al navegar en móvil
-    menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
       menu.classList.remove('open');
-      hamb.setAttribute('aria-expanded','false');
+      hamb.setAttribute('aria-expanded', 'false');
     }));
+  }
 
-    // Resaltar enlace activo según la sección visible
-    const links = Array.from(menu.querySelectorAll('a'));
-    const sections = links.map(a=> document.querySelector(a.getAttribute('href')));
-    const obs = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          links.forEach(l=>l.classList.remove('active'));
-          const id = '#'+e.target.id;
-          const current = links.find(l=> l.getAttribute('href')===id);
-          current && current.classList.add('active');
-        }
-      })
-    },{rootMargin:'-45% 0px -50% 0px', threshold:0});
-    sections.forEach(s=> s && obs.observe(s));
+  // Resaltar enlace activo según la sección visible
+  const links = Array.from(menu.querySelectorAll('a'));
+  const sections = links
+    .map(a => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const id = '#' + e.target.id;
+        const current = links.find(l => l.getAttribute('href') === id);
+        current && current.classList.add('active');
+      }
+    })
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+  sections.forEach(s => obs.observe(s));
 
-    // Botón volver arriba
-    const toTop = document.getElementById('toTop');
-    const toggleTop = ()=>{
-      if(window.scrollY>400){toTop.classList.add('show')} else {toTop.classList.remove('show')}
-    }
-    addEventListener('scroll', toggleTop, {passive:true});
-    toggleTop();
+  // Botón volver arriba
+  const toTop = document.getElementById('toTop');
+  const toggleTop = () => {
+    if (window.scrollY > 400) { toTop.classList.add('show') } else { toTop.classList.remove('show') }
+  }
+  addEventListener('scroll', toggleTop, { passive: true });
+  toggleTop();
 
-    // ----- Filtros de Productos -----
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const productCards = document.querySelectorAll('#gridProductos .product-card');
+  // ===== Filtros (SOLO UNA VEZ) =====
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const productCards = document.querySelectorAll('#gridProductos .product-card');
 
-    filterButtons.forEach(btn=>{
-     btn.addEventListener('click', ()=>{
-    // activar botón
-    filterButtons.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const f = btn.dataset.filter; // all | sublimados | hogar | regalos
-    productCards.forEach(card=>{
-      const cat = card.dataset.cat;
-      const show = (f==='all') || (cat===f);
-      card.classList.toggle('hidden', !show);
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter; // all | sublimados | hogar | regalos
+      productCards.forEach(card => {
+        const cat = card.dataset.cat;
+        const show = (f === 'all') || (cat === f);
+        card.classList.toggle('hidden', !show);
       });
     });
   });
 
-    // ----- Filtros -----
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const productCards = document.querySelectorAll('#gridProductos .product-card');
-    
-    filterButtons.forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-    filterButtons.forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const f = btn.dataset.filter; // all | sublimados | hogar | regalos
-    productCards.forEach(card=>{
-      const cat = card.dataset.cat;
-      const show = (f==='all') || (cat===f);
-      card.classList.toggle('hidden', !show);
-      });
-    });
-  });
-
-    // ----- Carruseles independientes -----
-    document.querySelectorAll('.carousel').forEach(carousel=>{
+  // ===== Carruseles independientes =====
+  document.querySelectorAll('.carousel').forEach(carousel => {
     const img = carousel.querySelector('img');
     let fotos = [];
-    try { fotos = JSON.parse(carousel.dataset.fotos); } catch(e){ fotos = [img.src]; }
+    try {
+      fotos = JSON.parse(carousel.dataset.fotos);
+    } catch (e) {
+      fotos = [img.src];
+    }
     let i = 0;
 
     const prev = carousel.querySelector('.prev');
     const next = carousel.querySelector('.next');
 
-    if(prev) prev.addEventListener('click', ()=>{
-    i = (i - 1 + fotos.length) % fotos.length;
-    img.src = fotos[i];
+    if (prev) prev.addEventListener('click', () => {
+      i = (i - 1 + fotos.length) % fotos.length;
+      img.src = fotos[i];
     });
-    
-    if(next) next.addEventListener('click', ()=>{
-    i = (i + 1) % fotos.length;
-    img.src = fotos[i];
+
+    if (next) next.addEventListener('click', () => {
+      i = (i + 1) % fotos.length;
+      img.src = fotos[i];
     });
   });
-  </script>
+
+  // Deshabilitar el botón de tema (si existe), para que no cambie a claro
+  const themeBtn = document.getElementById('theme');
+  if (themeBtn) {
+    themeBtn.style.display = 'none';
+  }
+</script>
 </body>
 </html>
