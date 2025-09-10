@@ -167,16 +167,47 @@
 .product-img{aspect-ratio:1/1; width:100%; object-fit:contain; background:#fff; border-radius:10px; border:1px solid var(--border)}
 
 /* Carrusel */
-.carousel{position:relative}
-.carousel .nav-btn{ z-index: 2; }
-.carousel img{ display:block; width:100%; }
+.carousel{ position:relative }
+.carousel img{ display:block; width:100%; border-radius:10px }
+
+/* Botones */
+.carousel .nav-btn{
   position:absolute; top:50%; transform:translateY(-50%);
-  border:1px solid var(--border); background:var(--bg);
-  width:34px; height:34px; border-radius:999px; cursor:pointer; font-size:18px; line-height:0;
+  width:42px; height:42px; border-radius:999px;
+  border:1px solid rgba(255,255,255,.25);
+  background: rgba(0,0,0,.35);      /* fondo translúcido para modo oscuro */
+  color:#fff;                        /* flecha blanca */
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.35);
   display:flex; align-items:center; justify-content:center;
+  cursor:pointer; user-select:none;
+  z-index:2;
+  transition: transform .15s ease, background-color .15s ease, box-shadow .15s ease, opacity .15s ease;
 }
-.carousel .prev{left:6px}
-.carousel .next{right:6px}
+.carousel .prev{ left:10px }
+.carousel .next{ right:10px }
+
+.carousel .nav-btn:hover{
+  background: rgba(0,0,0,.55);
+  box-shadow: 0 8px 20px rgba(0,0,0,.45);
+  transform: translateY(-50%) scale(1.05);
+}
+.carousel .nav-btn:active{
+  transform: translateY(-50%) scale(0.97);
+}
+.carousel .nav-btn:focus{
+  outline: 2px solid #60a5fa; /* borde azul al usar teclado */
+  outline-offset: 2px;
+}
+
+/* Tamaño cómodo en móvil */
+@media (max-width: 680px){
+  .carousel .nav-btn{
+    width:36px; height:36px; font-size:16px;
+  }
+  .carousel .prev{ left:6px }
+  .carousel .next{ right:6px }
+}
 
 /* Etiquetita */
 .tag{display:inline-block; padding:4px 8px; border:1px solid var(--border); border-radius:999px; font-size:12px; color:var(--muted)}
@@ -768,6 +799,16 @@
   if (themeBtn) {
     themeBtn.style.display = 'none';
   }
+
+  // Accesibilidad: navegar con teclado (← →)
+  document.querySelectorAll('.carousel').forEach(c=>{
+  c.setAttribute('tabindex','0'); // hace focusable el carrusel
+  c.addEventListener('keydown', (e)=>{
+    if(e.key === 'ArrowLeft'){ c.querySelector('.prev')?.click(); }
+    if(e.key === 'ArrowRight'){ c.querySelector('.next')?.click(); }
+  });
+});
+
 </script>
 </body>
 </html>
