@@ -4,11 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>KUBO | MX</title>
-  <meta name="description" content="Kubo es un espacio creativo dedicado al diseño y la sublimación personalizada. Transformamos ideas en objetos únicos que acompañan tu día a día: playeras, tazas, sudaderas, termos, cilindros, piedras, juegos de baño personalizados, cerámica pintada y mucho más.
-                                    <br>
-                                    Cada pieza está pensada para reflejar tu estilo, tu marca o un recuerdo especial. Además, contamos con creaciones exclusivas como el cubo con tulipanes infinitos y la nube con tulipanes infinitos, detalles que transmiten elegancia y originalidad en cualquier ocasión.
-                                    <br>
-                                    En Kubo, creemos que cada objeto puede convertirse en una obra de arte personal. Nuestro compromiso es ofrecerte productos de calidad, diseños únicos y detalles que duran para siempre." />
+  <meta name="description" content="KUBO MX diseña y personaliza: playeras, tazas, sudaderas, termos, cilindros, piedras, juegos de baño, cerámica pintada y detalles con tulipanes infinitos.">
+
   <style>
     :root{
       --bg:#ffffff;
@@ -39,8 +36,8 @@
     .container{max-width:1100px; margin:0 auto; padding:0 16px}
 
     /* Header & Navbar */
-    header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.7); backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--border)}
-    .dark header{background:rgba(11,16,32,.6)}
+    header{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--border)}
+    .dark header{background:#0b1020cc; backdrop-filter:saturate(180%) blur(8px)}
     .nav{display:flex; align-items:center; gap:16px; padding:10px 0}
     .brand{font-weight:800; letter-spacing:.3px}
     .brand span{color:var(--brand)}
@@ -73,7 +70,7 @@
     section p.lead{color:var(--muted); margin:0 0 24px}
 
     /* Cards grid */
-    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:16px}
+    .grid{display:grid; grid-template-columns:repeat(12,1fr); gap:20px}
     .col-4{grid-column:span 4}
     .col-6{grid-column:span 6}
     .col-12{grid-column:span 12}
@@ -107,6 +104,7 @@
 .hidden{display:none !important}
   </style>
 </head>
+
 <body>
   <a class="sr-only" href="#inicio">Saltar al contenido</a>
   <header>
@@ -138,7 +136,7 @@
                                     En Kubo, creemos que cada objeto puede convertirse en una obra de arte personal. Nuestro compromiso es ofrecerte productos de calidad, diseños únicos y detalles que duran para siempre."
                                   </p>
       <div class="cta">
-        <a class="btn primary" href="#servicios">Ver </a>
+        <a class="btn primary" href="#servicios">Ver Productos</a>
         <a class="btn" href="#contacto">Contactanos</a>
       </div>
     </div>
@@ -165,6 +163,14 @@
 /* Cards de productos */
 .product-card{display:flex; flex-direction:column; gap:10px}
 .product-img{aspect-ratio:1/1; width:100%; object-fit:contain; background:#fff; border-radius:10px; border:1px solid var(--border)}
+
+.product-card .card{
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.product-card:hover .card{
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
 
 /* Carrusel */
 .carousel{ position:relative }
@@ -828,12 +834,23 @@
     <div class="container">
       <h2>Contacto</h2>
       <p class="lead">Formulario sin backend usando <code>mailto:</code> (abre tu cliente de correo). Para algo real, integra Formspree o un backend propio.</p>
-      <form class="card" action="mailto:alexis.uriel.tenorio@gmail.com" method="post" enctype="text/plain">
-        <label>Nombre<br><input name="Nombre" required style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></label><br><br>
-        <label>Correo<br><input type="email" name="Email" required style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></label><br><br>
-        <label>Mensaje<br><textarea name="Mensaje" required rows="5" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px"></textarea></label><br><br>
-        <button class="btn primary" type="submit">Enviar</button>
-      </form>
+      <a href="https://wa.me/5215555555555?text=Hola%20KUBO%20MX,%20quiero%20cotizar" class="wa-float" aria-label="WhatsApp KUBO MX">🟢</a>
+      .wa-float{
+      position:fixed; right:16px; bottom:80px; 
+      width:52px; height:52px; border-radius:999px; 
+      display:flex; align-items:center; justify-content:center;
+      background:#25D366; color:#fff; font-size:24px; 
+      box-shadow:0 10px 24px rgba(0,0,0,.35); z-index:60;
+     }
+      .wa-float:hover{ filter:brightness(1.05) }
+
+     <form class="card" action="trjm22@hotmail.com" method="POST">
+      <label>Nombre<br><input name="nombre" required ...></label><br><br>
+      <label>Correo<br><input type="email" name="email" required ...></label><br><br>
+      <label>Mensaje<br><textarea name="mensaje" required rows="5" ...></textarea></label><br><br>
+      <button class="btn primary" type="submit">Enviar</button>
+     </form>
+
     </div>
   </section>
 
@@ -895,45 +912,34 @@
 
   // ===== Filtros (SOLO UNA VEZ) =====
   const filterButtons = document.querySelectorAll('.filter-btn');
-  const productCards = document.querySelectorAll('#gridProductos .product-card');
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const f = btn.dataset.filter; // all | sublimados | hogar | regalos
-      productCards.forEach(card => {
-        const cat = card.dataset.cat;
-        const show = (f === 'all') || (cat === f);
-        card.classList.toggle('hidden', !show);
-      });
+  filterButtons.forEach(btn=>{
+  btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
+  btn.addEventListener('click', ()=>{
+    filterButtons.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+    btn.classList.add('active'); btn.setAttribute('aria-pressed','true');
+    const f = btn.dataset.filter;
+    document.querySelectorAll('#gridProductos .product-card').forEach(card=>{
+      card.classList.toggle('hidden', !(f==='all' || card.dataset.cat===f));
+     });
     });
-  });
+   });
+
 
   // ===== Carruseles independientes =====
-  document.querySelectorAll('.carousel').forEach(carousel => {
-    const img = carousel.querySelector('img');
-    let fotos = [];
-    try {
-      fotos = JSON.parse(carousel.dataset.fotos);
-    } catch (e) {
-      fotos = [img.src];
-    }
-    let i = 0;
+  document.querySelectorAll('.carousel').forEach(carousel=>{
+  const img = carousel.querySelector('img');
+  let fotos = [];
+  try { fotos = JSON.parse(carousel.dataset.fotos); } catch(e){ fotos = [img.src]; }
+  let i = 0;
+  const prev = carousel.querySelector('.prev');
+  const next = carousel.querySelector('.next');
+  const go = d => { i = (i + d + fotos.length) % fotos.length; img.src = fotos[i]; }
 
-    const prev = carousel.querySelector('.prev');
-    const next = carousel.querySelector('.next');
-
-    if (prev) prev.addEventListener('click', () => {
-      i = (i - 1 + fotos.length) % fotos.length;
-      img.src = fotos[i];
-    });
-
-    if (next) next.addEventListener('click', () => {
-      i = (i + 1) % fotos.length;
-      img.src = fotos[i];
-    });
+  prev?.addEventListener('click', ()=>go(-1));
+  next?.addEventListener('click', ()=>go(1));
+  img.addEventListener('click', ()=>go(1)); // NUEVO: click en la foto
   });
+
 
   // Deshabilitar el botón de tema (si existe), para que no cambie a claro
   const themeBtn = document.getElementById('theme');
