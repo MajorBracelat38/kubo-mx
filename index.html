@@ -90,6 +90,10 @@
     .to-top{position:fixed; right:16px; bottom:16px; border:1px solid var(--border); background:var(--bg); border-radius:999px; padding:10px 12px; display:none}
     .to-top.show{display:inline-flex}
 
+    /*Back to bottom */
+    .to-bottom{position:fixed; right:16px; bottom:80px; border:1px solid var(--border); background:var(--bg); border-radius:999px; padding:10px 12px; display:none; z-index:999;}
+    .to-bottom.show{ display:inline-flex }
+
     /* Helpers */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
@@ -845,7 +849,6 @@
   <section id="contacto">
     <div class="container">
       <h2>Contacto</h2>
-      <p class="lead">Formulario sin backend usando <code>mailto:</code> (abre tu cliente de correo). Para algo real, integra Formspree o un backend propio.</p>
 
       <p class="lead" style="margin-top:12px;">
         ¿Prefieres WhatsApp? 
@@ -854,7 +857,7 @@
       </a>
       </p>
 
-     <form class="card" action="trjm22@hotmail.com" method="POST">
+     <form class="card" action="mailto:trjm22@hotmail.com" method="post" enctype="text/plain">
       <label>Nombre<br><input name="nombre" required ...></label><br><br>
       <label>Correo<br><input type="email" name="email" required ...></label><br><br>
       <label>Mensaje<br><textarea name="mensaje" required rows="5" ...></textarea></label><br><br>
@@ -871,6 +874,7 @@
   </footer>
 
   <a id="toTop" href="#inicio" class="to-top" aria-label="Volver arriba">↑</a>
+  <a id="toBottom" href="#contacto" class="to-bottom" aria-label="Ir abajo">↓</a>
 
   <script>
   // === MODO OSCURO SIEMPRE ===
@@ -912,13 +916,22 @@
   }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
   sections.forEach(s => obs.observe(s));
 
-  // Botón volver arriba
+  // Botones arriba/abajo
   const toTop = document.getElementById('toTop');
-  const toggleTop = () => {
-    if (window.scrollY > 400) { toTop.classList.add('show') } else { toTop.classList.remove('show') }
-  }
-  addEventListener('scroll', toggleTop, { passive: true });
-  toggleTop();
+  const toBottom = document.getElementById('toBottom');
+  function toggleScrollButtons(){
+  const y = window.scrollY;
+  const docH = document.documentElement.scrollHeight;
+  const winH = window.innerHeight;
+
+  // Arriba: aparece tras 400px
+  if (y > 400) { toTop.classList.add('show') } else { toTop.classList.remove('show') }
+
+  // Abajo: oculto cuando ya casi llegaste al final (a 200px del fondo)
+  if (y + winH < docH - 200) { toBottom.classList.add('show') } else { toBottom.classList.remove('show') }
+   }
+  addEventListener('scroll', toggleScrollButtons, { passive:true });
+  toggleScrollButtons();
 
   // ===== Filtros (SOLO UNA VEZ) =====
   const filterButtons = document.querySelectorAll('.filter-btn');
@@ -966,13 +979,12 @@
   });
 });
 
-  <a href="https://wa.me/525545187726?text=Hola%20KUBO%20MX,%20quiero%20cotizar"
-  class="wa-float"
-  aria-label="WhatsApp KUBO MX"
-  title="Escríbenos por WhatsApp"
-  target="_blank" rel="noopener">🟢</a>
-
-
-</script>
-</body>
+  </script>
+  <!-- Botón flotante WhatsApp -->
+   <a href="https://wa.me/525545787726?text=Hola%20KUBO%20MX,%20quiero%20cotizar"
+   class="wa-float"
+   aria-label="WhatsApp KUBO MX"
+   title="Escríbenos por WhatsApp"
+   target="_blank" rel="noopener">🟢</a>
+  </body>
 </html>
